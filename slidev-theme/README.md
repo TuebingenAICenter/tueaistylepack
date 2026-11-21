@@ -44,7 +44,9 @@ view with notes; all controls are described in the
 
 The fonts (Roboto Condensed, Roboto Mono, Plus Jakarta Sans) come with the
 theme. Nothing has to be installed on the machine, and nothing is loaded from
-the internet while presenting.
+the internet while presenting. They are licensed under the SIL Open Font
+License; see [`assets/fonts`](assets/fonts/README.md) for their source and
+license files.
 
 ## Share the slides with students
 
