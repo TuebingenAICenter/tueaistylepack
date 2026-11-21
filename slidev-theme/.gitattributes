@@ -1,0 +1,5 @@
+# The repository stores *.svg in Git LFS. The graphics of the theme are small
+# text files that the build reads directly. They are kept in plain Git, where
+# they can be diffed and are present in checkouts without LFS (CI, source
+# archives). The fonts of the theme are in LFS, like all other binary files.
+*.svg !filter !diff !merge !text

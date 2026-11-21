@@ -1,0 +1,51 @@
+/*
+ * Font families and sizes, mirroring beamerfontthemetueai.sty.
+ *
+ * All lengths of the theme are written in the units of the LaTeX sources.
+ * The beamer theme sets a 16:9 frame on 160mm x 90mm "paper" in 10pt; the
+ * Slidev canvas is 960px wide (see package.json), so that
+ *
+ *     1mm = 6px    and    1pt (TeX) = 960px / 455.244 = 2.10876px.
+ *
+ * Slidev lays out every slide on this fixed canvas and then scales the whole
+ * canvas to the window, the projector or the PDF page. Line breaks and
+ * positions are therefore identical at every size and resolution.
+ */
+
+.tueai-slide {
+  --mm: 6px;
+  --cm: 60px;
+  --pt: 2.10876px;
+
+  /* \setmainfont{Roboto Condensed Light}: "bold" is the Regular weight */
+  --font-main: 'Roboto Condensed', sans-serif;
+  --weight-normal: 300;
+  --weight-bold: 400;
+  /* \setmonofont[Scale=0.9]{Roboto Mono} */
+  --font-mono: 'Roboto Mono', monospace;
+  --mono-scale: 0.9;
+  /* \titlefont: Plus Jakarta Sans, the open replacement for Circular */
+  --font-title: 'Plus Jakarta Sans', sans-serif;
+  /* Scale=MatchUppercase, as measured in the PDF of the beamer theme */
+  --title-scale: 0.9319;
+
+  /* Distance from the middle of a line down to its baseline, in em. It follows
+     from the ascent and descent of Roboto Condensed: (0.9277 - 0.2441) / 2 */
+  --baseline-shift: 0.3418em;
+
+  font-family: var(--font-main);
+  font-weight: var(--weight-normal);
+  font-synthesis: none;
+  font-kerning: normal;
+  /* Unhinted glyphs with fractional advance widths: the text is typeset the
+     same way on every platform and at every zoom level. */
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* \normalsize of beamer's 10pt class: 10pt on a baseline skip of 12pt */
+.tueai-slide {
+  font-size: calc(10 * var(--pt));
+  line-height: calc(12 * var(--pt));
+}
