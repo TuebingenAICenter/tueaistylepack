@@ -1,0 +1,59 @@
+# Publishes the deck on GitHub Pages on every push to main:
+#
+#   https://<user>.github.io/<repository>/              the interactive slides
+#   https://<user>.github.io/<repository>/slides.html   the same as a single file
+#   https://<user>.github.io/<repository>/slides.pdf    the PDF
+#
+# Enable it once under Settings > Pages > Source: "GitHub Actions".
+
+name: Deploy slides
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive # the theme
+          lfs: true # images tracked with Git LFS
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      # the browser that renders the PDF
+      - run: npx playwright install --with-deps chromium
+
+      - name: Build website, single file and PDF
+        run: |
+          npm run build -- --base /${{ github.event.repository.name }}/
+          npm run build:standalone
+          cp slides.html dist/
+          cp dist/slidev-exported.pdf dist/slides.pdf
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+      - id: deployment
+        uses: actions/deploy-pages@v4
