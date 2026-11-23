@@ -30,6 +30,12 @@
   flex: 1;
   min-height: 0;
   padding: 0 var(--margin);
+  /* The title bar lies on a layer below this box (see "Frame title"). Clicks
+     have to pass through the box itself to reach links in the title. */
+  pointer-events: none;
+}
+.tueai-frame-body > * {
+  pointer-events: auto;
 }
 
 /* beamer centers the content of a frame a little above the middle: 2/5 of the
