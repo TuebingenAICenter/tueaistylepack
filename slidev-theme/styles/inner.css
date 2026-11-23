@@ -203,6 +203,11 @@
 .tueai-slide :not(.katex-display) > .katex {
   line-height: 0;
 }
+/* The stacks inside a formula (sub- and superscripts, accents, roots) keep
+   the line height of KaTeX. Without it, Safari sets them too high. */
+.tueai-slide .katex .vlist-t {
+  line-height: 1.2;
+}
 .tueai-slide .katex-display {
   margin: calc(8.8 * var(--pt)) 0 calc(10 * var(--pt)); /* \abovedisplayskip, \belowdisplayskip */
 }
