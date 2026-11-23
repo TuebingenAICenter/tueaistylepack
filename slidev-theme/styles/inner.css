@@ -233,6 +233,26 @@
 .tueai-slide .katex .mathnormal {
   font-family: 'TueAI Math Letters', KaTeX_Math;
 }
-.tueai-slide .katex :is(.mathrm, .mop:not(.op-symbol), .mord.text) {
+/* The names of operators (\exp, \operatorname{...}) */
+.tueai-slide .katex .mop:not(.op-symbol) {
   font-family: 'TueAI Math Letters', KaTeX_Main;
+}
+
+/* \text{...} and \mathrm{...} are set in the text font of the slide, digits
+   and punctuation included. KaTeX resets the weight, so it is set again. */
+.tueai-slide .katex :is(.text, .mathrm) {
+  font-family: var(--font-main), KaTeX_Main;
+  font-weight: var(--weight-normal);
+}
+.tueai-slide .katex .textbf {
+  font-weight: var(--weight-bold);
+}
+.tueai-slide .katex .texttt {
+  font-family: var(--font-mono), KaTeX_Typewriter;
+  font-size: calc(var(--mono-scale) * 1em);
+}
+/* The symbols of a formula inside a text, \text{if $x > 1$}, stay as they are */
+.tueai-slide .katex .text :is(.mrel, .mbin, .mopen, .mclose, .mpunct) {
+  font-family: KaTeX_Main;
+  font-weight: normal;
 }
