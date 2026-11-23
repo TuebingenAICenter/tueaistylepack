@@ -20,8 +20,8 @@
       "lineNumbers": true,
       "fonts": {
         "provider": "none",
-        "sans": "Roboto Condensed",
-        "mono": "Roboto Mono"
+        "sans": "TueAI Roboto Condensed",
+        "mono": "TueAI Roboto Mono"
       }
     }
   }

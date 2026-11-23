@@ -216,6 +216,10 @@ Screenshots of the example deck from 640 × 360 to 3840 × 2160 pixels, at pixel
 ratios from 1 to 3, in windows that are not 16:9, and of the exported PDF all
 show the same layout.
 
+Chromium, Firefox and WebKit (the engine of Safari) set the example deck alike,
+with lines of text within a pixel of each other. Only the controls of the
+browser itself, like the sliders of the interactive example, look different.
+
 Known differences:
 
 - **Line breaks in borderline cases.** TeX optimizes the line breaks of a whole

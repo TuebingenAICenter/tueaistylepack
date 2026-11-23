@@ -4,6 +4,9 @@
  * render identically offline, in exported PDFs and in standalone builds.
  *
  * - Latin and Latin-Extended subsets, taken from the @fontsource packages.
+ * - The families carry the prefix "TueAI". Under their own names, Safari
+ *   prefers a copy installed on the machine (as the beamer theme needs it)
+ *   for every weight that is not bundled here.
  * - `font-display: block`: a slide is never laid out with fallback metrics.
  * - Roboto Condensed ships different vertical metrics for macOS (hhea) and
  *   Windows (OS/2 win). The `*-override` descriptors pin the hhea values, so
@@ -11,7 +14,7 @@
  */
 
 @font-face {
-  font-family: 'Roboto Condensed';
+  font-family: 'TueAI Roboto Condensed';
   font-style: normal;
   font-weight: 300;
   font-display: block;
@@ -23,7 +26,7 @@
 }
 
 @font-face {
-  font-family: 'Roboto Condensed';
+  font-family: 'TueAI Roboto Condensed';
   font-style: normal;
   font-weight: 300;
   font-display: block;
@@ -35,7 +38,7 @@
 }
 
 @font-face {
-  font-family: 'Roboto Condensed';
+  font-family: 'TueAI Roboto Condensed';
   font-style: italic;
   font-weight: 300;
   font-display: block;
@@ -47,7 +50,7 @@
 }
 
 @font-face {
-  font-family: 'Roboto Condensed';
+  font-family: 'TueAI Roboto Condensed';
   font-style: italic;
   font-weight: 300;
   font-display: block;
@@ -59,7 +62,7 @@
 }
 
 @font-face {
-  font-family: 'Roboto Condensed';
+  font-family: 'TueAI Roboto Condensed';
   font-style: normal;
   font-weight: 400;
   font-display: block;
@@ -71,7 +74,7 @@
 }
 
 @font-face {
-  font-family: 'Roboto Condensed';
+  font-family: 'TueAI Roboto Condensed';
   font-style: normal;
   font-weight: 400;
   font-display: block;
@@ -83,7 +86,7 @@
 }
 
 @font-face {
-  font-family: 'Roboto Condensed';
+  font-family: 'TueAI Roboto Condensed';
   font-style: italic;
   font-weight: 400;
   font-display: block;
@@ -95,7 +98,7 @@
 }
 
 @font-face {
-  font-family: 'Roboto Condensed';
+  font-family: 'TueAI Roboto Condensed';
   font-style: italic;
   font-weight: 400;
   font-display: block;
@@ -107,7 +110,7 @@
 }
 
 @font-face {
-  font-family: 'Roboto Mono';
+  font-family: 'TueAI Roboto Mono';
   font-style: normal;
   font-weight: 400;
   font-display: block;
@@ -116,7 +119,7 @@
 }
 
 @font-face {
-  font-family: 'Roboto Mono';
+  font-family: 'TueAI Roboto Mono';
   font-style: normal;
   font-weight: 400;
   font-display: block;
@@ -125,7 +128,7 @@
 }
 
 @font-face {
-  font-family: 'Roboto Mono';
+  font-family: 'TueAI Roboto Mono';
   font-style: italic;
   font-weight: 400;
   font-display: block;
@@ -134,7 +137,7 @@
 }
 
 @font-face {
-  font-family: 'Roboto Mono';
+  font-family: 'TueAI Roboto Mono';
   font-style: italic;
   font-weight: 400;
   font-display: block;
@@ -143,7 +146,7 @@
 }
 
 @font-face {
-  font-family: 'Roboto Mono';
+  font-family: 'TueAI Roboto Mono';
   font-style: normal;
   font-weight: 700;
   font-display: block;
@@ -152,7 +155,7 @@
 }
 
 @font-face {
-  font-family: 'Roboto Mono';
+  font-family: 'TueAI Roboto Mono';
   font-style: normal;
   font-weight: 700;
   font-display: block;
@@ -161,7 +164,7 @@
 }
 
 @font-face {
-  font-family: 'Plus Jakarta Sans';
+  font-family: 'TueAI Plus Jakarta Sans';
   font-style: normal;
   font-weight: 400;
   font-display: block;
@@ -170,7 +173,7 @@
 }
 
 @font-face {
-  font-family: 'Plus Jakarta Sans';
+  font-family: 'TueAI Plus Jakarta Sans';
   font-style: normal;
   font-weight: 400;
   font-display: block;
@@ -179,7 +182,7 @@
 }
 
 @font-face {
-  font-family: 'Plus Jakarta Sans';
+  font-family: 'TueAI Plus Jakarta Sans';
   font-style: normal;
   font-weight: 500;
   font-display: block;
@@ -188,7 +191,7 @@
 }
 
 @font-face {
-  font-family: 'Plus Jakarta Sans';
+  font-family: 'TueAI Plus Jakarta Sans';
   font-style: normal;
   font-weight: 500;
   font-display: block;
@@ -197,7 +200,7 @@
 }
 
 @font-face {
-  font-family: 'Plus Jakarta Sans';
+  font-family: 'TueAI Plus Jakarta Sans';
   font-style: normal;
   font-weight: 700;
   font-display: block;
@@ -206,7 +209,7 @@
 }
 
 @font-face {
-  font-family: 'Plus Jakarta Sans';
+  font-family: 'TueAI Plus Jakarta Sans';
   font-style: normal;
   font-weight: 700;
   font-display: block;
