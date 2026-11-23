@@ -228,6 +228,6 @@
 .tueai-slide .katex .mathnormal {
   font-family: 'TueAI Math Letters', KaTeX_Math;
 }
-.tueai-slide .katex :is(.mathrm, .mop:not(.op-symbol)) {
+.tueai-slide .katex :is(.mathrm, .mop:not(.op-symbol), .mord.text) {
   font-family: 'TueAI Math Letters', KaTeX_Main;
 }
