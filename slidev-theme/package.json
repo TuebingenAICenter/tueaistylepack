@@ -1,0 +1,28 @@
+{
+  "name": "slidev-theme-tueai",
+  "version": "0.1.0",
+  "description": "Slidev theme in the style of the Tübingen AI Center, matching the tueai beamer theme",
+  "license": "MIT",
+  "type": "module",
+  "keywords": [
+    "slidev-theme",
+    "slidev"
+  ],
+  "engines": {
+    "node": ">=20.12.0",
+    "slidev": ">=53.0.0"
+  },
+  "slidev": {
+    "colorSchema": "light",
+    "defaults": {
+      "aspectRatio": "16/9",
+      "canvasWidth": 960,
+      "lineNumbers": true,
+      "fonts": {
+        "provider": "none",
+        "sans": "TueAI Roboto Condensed",
+        "mono": "TueAI Roboto Mono"
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+node_modules
+dist
+.standalone
+.slidev
+*.local
+
+# exports of the deck
+/*.html
+/*.pdf

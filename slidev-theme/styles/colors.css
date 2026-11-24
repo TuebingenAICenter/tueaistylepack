@@ -1,0 +1,104 @@
+/*
+ * Color palette and color roles, mirroring beamercolorthemetueai.sty.
+ */
+
+:root {
+  /* University of Tübingen: primary colors */
+  --tu-red: #a51e37;
+  --tu-gold: #b4a069;
+  --tu-dark: #32414b;
+  --tu-gray: #afb3b7;
+  /* University of Tübingen: secondary colors */
+  --tu-darkblue: #415a8c;
+  --tu-blue: #0069aa;
+  --tu-lightblue: #50aac8;
+  --tu-lightgreen: #82b9a0;
+  --tu-green: #7da54b;
+  --tu-darkgreen: #326e1e;
+  --tu-ocre: #c8503c;
+  --tu-violet: #af6e96;
+  --tu-mauve: #b4a096;
+  --tu-beige: #d7b469;
+  --tu-orange: #d29600;
+  --tu-brown: #916946;
+
+  /* Tübingen AI Center: black & white */
+  --tueai-dark: #383838;
+  --tueai-gray: #f6f6f6;
+  /* Tübingen AI Center: primary colors */
+  --tueai-darkblue: #1a3a5b;
+  --tueai-accent: #ea4b2e;
+  --tueai-lightblue: #85cbd2;
+  /* Tübingen AI Center: secondary colors */
+  --tueai-oceanblue: #77ddcc;
+  --tueai-oceangreen: #77dd9f;
+  --tueai-springgreen: #bad548;
+  --tueai-brightyellow: #ffdd00;
+
+  /* Extended palette from the logo of the All-Hands Meeting of the German AI centers */
+  --tueai-deepnavy: #003063;
+  --tueai-indigo: #1d3a8f;
+  --tueai-steelblue: #1275ac;
+  --tueai-azure: #007fff;
+  --tueai-skyblue: #009ee3;
+  --tueai-lightazure: #59bdf7;
+  --tueai-palesky: #7fcce0;
+  --tueai-iceblue: #b1deeb;
+  --tueai-cyan: #2ebad5;
+  --tueai-teal: #0098a6;
+  --tueai-mint: #00ebb5;
+  --tueai-sage: #6abfa3;
+  --tueai-moss: #56af31;
+  --tueai-violet: #8c78ff;
+  --tueai-plum: #983082;
+  --tueai-raspberry: #e82e82;
+  --tueai-rose: #ec619f;
+}
+
+/* Color roles of a regular (light) frame */
+.tueai-slide {
+  --fg: var(--tueai-dark);
+  --bg: white;
+  --structure: var(--tueai-darkblue);
+  --alert: var(--tueai-accent);
+  --link: var(--tueai-accent);
+
+  --frametitle-fg: white;
+  --frametitle-bg: var(--tueai-darkblue);
+  --framesubtitle-fg: color-mix(in srgb, var(--tueai-darkblue) 30%, white);
+  --footline-fg: var(--tueai-dark);
+  --pagenumber-fg: white;
+  --pagenumber-bg: var(--tueai-lightblue);
+
+  /* enumerate labels, and the bullets of the three itemize levels */
+  --item: var(--tueai-accent);
+  --bullet-1: var(--tueai-accent);
+  --bullet-2: var(--tueai-lightblue);
+  --bullet-3: var(--tueai-oceanblue);
+
+  --ribbon-fg: var(--tueai-darkblue);
+  --ribbon-bg: var(--tueai-brightyellow);
+  --ribbon-item: var(--tueai-darkblue);
+  --ribbon-alert: var(--tueai-accent);
+
+  --rule: var(--tueai-brightyellow);
+}
+
+/* Color roles of a dark frame (\darkcolors) */
+.tueai-slide.tueai-dark {
+  --fg: white;
+  --bg: var(--tueai-dark);
+  --structure: white;
+
+  --frametitle-bg: var(--tueai-dark);
+  --framesubtitle-fg: color-mix(in srgb, var(--tueai-dark) 30%, white);
+  --footline-fg: color-mix(in srgb, var(--tueai-dark) 30%, white);
+  --pagenumber-bg: var(--tueai-accent);
+
+  --item: white;
+
+  --ribbon-fg: var(--tueai-dark);
+  --ribbon-bg: white;
+  --ribbon-item: var(--tueai-dark);
+  --ribbon-alert: var(--tueai-darkblue);
+}

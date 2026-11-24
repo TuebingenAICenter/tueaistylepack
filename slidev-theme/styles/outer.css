@@ -1,0 +1,160 @@
+/*
+ * The outside of a frame: frame title, frame subtitle and footline.
+ * Mirrors beamerouterthemetueai.sty.
+ *
+ * A frame is written as plain Markdown:
+ *
+ *     # Frame title
+ *     ## Frame subtitle (optional)
+ *
+ *     Content ...
+ *
+ * The leading `#` heading becomes the title bar and a `##` heading directly
+ * after it the subtitle. Everything else is centered vertically between the
+ * title bar and the footline, like the content of a beamer frame.
+ *
+ * The lengths without an obvious origin in the beamer sources (4.76pt, ...)
+ * were measured in the PDF of the beamer theme.
+ */
+
+.tueai-frame {
+  --margin: calc(1 * var(--cm)); /* beamer's text margin */
+  --titlesep: calc(0.3 * var(--cm));
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------- Frame body ---------- */
+
+.tueai-frame-body {
+  flex: 1;
+  min-height: 0;
+  padding: 0 var(--margin);
+  /* The title bar lies on a layer below this box (see "Frame title"). Clicks
+     have to pass through the box itself to reach links in the title. */
+  pointer-events: none;
+}
+.tueai-frame-body > * {
+  pointer-events: auto;
+}
+
+/* beamer centers the content of a frame a little above the middle: 2/5 of the
+   free space go above it, 3/5 below. The two pseudo-elements are that glue. */
+.tueai-frame-body,
+.tueai-plain {
+  display: flex;
+  flex-direction: column;
+}
+:is(.tueai-frame-body, .tueai-plain) > * {
+  order: 2;
+  flex: none;
+}
+:is(.tueai-frame-body, .tueai-plain)::before,
+:is(.tueai-frame-body, .tueai-plain)::after {
+  content: '';
+}
+:is(.tueai-frame-body, .tueai-plain)::before {
+  order: 1;
+  flex: 2 1 0;
+}
+:is(.tueai-frame-body, .tueai-plain)::after {
+  order: 3;
+  flex: 3 1 0;
+}
+
+/* The darkframe environment of the beamer theme opens with an empty line
+   (the paragraph that holds its symbol), unless text follows immediately. */
+.tueai-dark > .tueai-frame-body::before {
+  flex-basis: calc(12 * var(--pt));
+}
+
+/* Plain frames (the `plain` and `pattern` layouts) have no title and footline */
+.tueai-plain {
+  padding: 0 calc(1 * var(--cm)) calc(3.84 * var(--pt));
+}
+
+/* ---------- Frame title ---------- */
+
+/* Title and subtitle are moved in front of the glue (order: 0) */
+.tueai-frame-body > h1:first-child,
+.tueai-frame-body > h1:first-child + h2 {
+  --titleskip: calc(1.97 * var(--pt)); /* space that beamer keeps below the bar */
+  order: 0;
+  /* below side images, which may run over the title bar */
+  position: relative;
+  z-index: -2;
+  margin: 0 calc(-1 * var(--margin)) var(--titleskip);
+  padding: 0 var(--titlesep);
+  background: var(--frametitle-bg);
+  font-weight: var(--weight-normal);
+}
+
+.tueai-frame-body > h1:first-child {
+  padding-top: calc(4.76 * var(--pt));
+  padding-bottom: calc(2.85 * var(--pt));
+  color: var(--frametitle-fg);
+  font-size: calc(14.4 * var(--pt)); /* \Large */
+  line-height: calc(18 * var(--pt));
+}
+
+/* The symbol of the logo at the right end of the title line */
+.tueai-frame-body > h1:first-child::after,
+.tueai-frame-symbol {
+  position: absolute;
+  top: calc(4.3 * var(--pt));
+  right: var(--titlesep);
+  height: calc(14.4 * var(--pt));
+  aspect-ratio: 264 / 284;
+}
+.tueai-frame-body > h1:first-child::after {
+  content: '';
+  background: url('../assets/logos/TUEAI_Symbol_inv_RGB.svg') center / contain no-repeat;
+}
+
+.tueai-frame-body > h1:first-child + h2 {
+  /* overlaps the title by 1.19pt, so that no seam can show between the two */
+  margin-top: calc(-1.19 * var(--pt) - var(--titleskip));
+  padding-bottom: calc(2.12 * var(--pt));
+  color: var(--framesubtitle-fg);
+  font-size: calc(8 * var(--pt)); /* \footnotesize */
+  line-height: calc(9.5 * var(--pt));
+}
+
+/* ---------- Footline ---------- */
+
+.tueai-footline {
+  flex: none;
+  display: flex;
+  align-items: flex-end;
+  height: calc(12.73 * var(--pt));
+  padding: 0 calc(0.3 * var(--cm));
+  color: var(--footline-fg);
+  font-size: calc(5 * var(--pt)); /* \tiny */
+  line-height: 1;
+  white-space: pre;
+}
+.tueai-footline > * {
+  /* the baseline lies 1.5ex above the bottom edge (1ex = 0.528em) */
+  margin-bottom: calc(1.5 * 0.528em - 0.5em + var(--baseline-shift));
+}
+.tueai-footline a {
+  color: var(--link);
+  text-decoration: none;
+}
+.tueai-footline-number {
+  margin-left: auto;
+  color: var(--pagenumber-fg);
+}
+
+/* The little flag behind the frame number (drawn with a 0.4pt outline) */
+.tueai-footline-flag {
+  --outline: calc(0.2 * var(--pt));
+  position: absolute;
+  z-index: -1;
+  right: calc(2.5 * var(--mm) - var(--outline));
+  bottom: 0;
+  width: calc(2.5 * var(--mm) + 2 * var(--outline));
+  height: calc(3.75 * var(--mm) + var(--outline));
+  background: var(--pagenumber-bg);
+  clip-path: polygon(0 20%, 100% 0, 100% 100%, 0 100%);
+}

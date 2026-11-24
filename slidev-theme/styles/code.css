@@ -1,0 +1,48 @@
+/*
+ * Code blocks, mirroring \pythonblock in beamerthemetueai.sty: a gray box
+ * with a thin dark blue frame and a broad left rule that carries the line
+ * numbers. Long lines wrap instead of being cut off.
+ */
+
+.tueai-slide {
+  --code-rule: calc(10 * var(--pt)); /* leftrule=10pt */
+  --code-padding: calc(6.16 * var(--pt));
+
+  --slidev-code-font-family: var(--font-mono);
+  --slidev-code-font-size: calc(7 * var(--mono-scale) * var(--pt)); /* \scriptsize */
+  --slidev-code-line-height: calc(8 * var(--pt));
+  --slidev-code-background: var(--tueai-gray);
+  --slidev-code-foreground: var(--tueai-darkblue);
+  --slidev-code-padding: calc(2.18 * var(--pt)) var(--code-padding) calc(4.19 * var(--pt));
+  --slidev-code-radius: 0;
+  --slidev-code-margin: calc(7.09 * var(--pt)) 0 calc(4.33 * var(--pt));
+}
+
+.tueai-slide .slidev-code {
+  border: calc(0.3 * var(--mm)) solid var(--tueai-darkblue);
+  border-left-width: var(--code-rule);
+  color: var(--slidev-code-foreground);
+  white-space: pre-wrap;
+  /* the line numbers sit in the left rule, outside of the padding box */
+  overflow: visible;
+}
+.tueai-slide .slidev-code code {
+  font-size: inherit;
+}
+
+/* bold and italic tokens of the syntax theme */
+.tueai-slide .shiki span {
+  font-weight: var(--shiki-light-font-weight, inherit);
+  font-style: var(--shiki-light-font-style, inherit);
+}
+
+/* Line numbers: \tiny and yellow, right-aligned inside the left rule */
+.tueai-slide .slidev-code-line-numbers .slidev-code code .line::before {
+  --inset: calc(2.6 * var(--pt)); /* distance to the right edge of the rule */
+  width: var(--code-rule);
+  margin: 0 calc(var(--code-padding) + var(--inset)) 0 calc(-1 * (var(--code-padding) + var(--inset) + var(--code-rule)));
+  color: var(--tueai-brightyellow);
+  font-family: var(--font-main);
+  font-size: calc(5 * var(--pt));
+  line-height: 1;
+}

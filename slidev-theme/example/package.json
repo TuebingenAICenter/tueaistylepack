@@ -1,0 +1,17 @@
+{
+  "name": "tueai-slides",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "slidev --open",
+    "build": "slidev build --download --router-mode hash",
+    "build:standalone": "node scripts/build-standalone.mjs",
+    "export": "slidev export --output slides.pdf",
+    "export:clicks": "slidev export --with-clicks --output slides-clicks.pdf"
+  },
+  "devDependencies": {
+    "@slidev/cli": "^53.1.0",
+    "playwright-chromium": "^1.65.1",
+    "vite-plugin-singlefile": "^2.3.4"
+  }
+}

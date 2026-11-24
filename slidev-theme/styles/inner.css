@@ -1,0 +1,258 @@
+/*
+ * The inside of a frame: text, lists, links, tables and math.
+ * Mirrors beamerinnerthemetueai.sty and beamer's defaults for 10pt.
+ */
+
+.tueai-slide {
+  position: relative;
+  /* own stacking context: side images sit between background and text */
+  isolation: isolate;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  color: var(--fg);
+  background: var(--bg);
+}
+
+/* ---------- Text ---------- */
+
+/* Like beamer, the theme sets no space between paragraphs (\parskip = 0pt).
+   Set --parskip on a slide or for the whole deck to have some. */
+.tueai-slide p + p {
+  margin-top: var(--parskip, 0pt);
+}
+
+/* TeX rather squeezes the spaces of a line a little than to break it one word
+   earlier. Letting text run 0.75pt over the edge of its box reproduces these
+   line breaks. */
+.tueai-slide :is(p, li) {
+  margin-right: calc(-0.75 * var(--pt));
+}
+.tueai-slide li :is(p, li) {
+  margin-right: 0;
+}
+
+/* The wider space at the end of a sentence, see markdown/sentence-spacing.ts.
+   TeX adds a third of the word space, which is 0.225em in Roboto Condensed. */
+.tueai-sentence-space {
+  word-spacing: calc(0.225em / 3);
+}
+
+.tueai-slide :is(b, strong) {
+  font-weight: var(--weight-bold);
+}
+
+.tueai-slide :is(code, kbd, samp) {
+  font-family: var(--font-mono);
+  font-size: calc(var(--mono-scale) * 1em);
+}
+
+/* \alert{...} */
+.tueai-slide .alert {
+  color: var(--alert);
+}
+
+/* \link{url}{text}: accent colored and underlined */
+.tueai-slide a {
+  color: var(--link);
+  text-decoration: underline;
+  text-decoration-thickness: calc(0.4 * var(--pt));
+  text-underline-offset: calc(1.8 * var(--pt));
+}
+
+.tueai-slide :is(h2, h3, h4) {
+  color: var(--structure);
+}
+.tueai-slide h3 {
+  font-size: calc(12 * var(--pt));
+  line-height: calc(14 * var(--pt));
+  margin-bottom: calc(3 * var(--pt));
+}
+
+/* quote: set in the quote font and indented on both sides like a list
+   (\topsep above and below; the two differ because of the other font) */
+.tueai-slide blockquote {
+  margin: calc(2.34 * var(--pt)) calc(20 * var(--pt)) calc(3.66 * var(--pt));
+  font-family: var(--font-title);
+  font-weight: 500;
+}
+
+/* ---------- Lists ---------- */
+
+/* \leftmargin = 2em and \labelsep = .5em of the 10pt font, on every level */
+.tueai-slide :is(ul, ol) {
+  --labelsep: calc(5 * var(--pt));
+  --itemsep: calc(3 * var(--pt));
+  margin: calc(3 * var(--pt)) 0; /* \topsep */
+  padding-left: calc(20 * var(--pt));
+}
+.tueai-slide :is(ul, ol) > li {
+  position: relative;
+}
+.tueai-slide :is(ul, ol) > li + li {
+  margin-top: var(--itemsep);
+}
+
+/* Second level: \small, third level: \footnotesize, both without \itemsep.
+   TeX measures line spacing from baseline to baseline, CSS stacks line boxes;
+   where the font size changes, --leadfix makes up for the difference. */
+.tueai-slide li :is(ul, ol) {
+  --itemsep: 0pt;
+  --leadfix: calc(0.158 * var(--pt));
+  margin: calc(2 * var(--pt) - var(--leadfix)) 0 calc(2 * var(--pt));
+  padding-bottom: var(--leadfix);
+  font-size: calc(9 * var(--pt));
+  line-height: calc(11 * var(--pt));
+}
+.tueai-slide li li :is(ul, ol) {
+  --leadfix: calc(0.408 * var(--pt));
+  font-size: calc(8 * var(--pt));
+  line-height: calc(9.5 * var(--pt));
+}
+
+/* A quirk of beamer that is visible in every nested list: an item that is
+   directly followed by a nested list is set with the tighter line spacing
+   of that list, and so moves up by the difference (12pt - 11pt - 9.5pt). */
+.tueai-slide li:has(> :is(ul, ol)) {
+  margin-top: calc(-1 * var(--pt));
+}
+.tueai-slide li + li:has(> :is(ul, ol)) {
+  margin-top: calc(var(--itemsep) - 1 * var(--pt));
+}
+.tueai-slide li li:has(> :is(ul, ol)) {
+  margin-top: calc(-1.5 * var(--pt));
+}
+
+/* enumerate: "1." right-aligned in front of the item, and "2.1." in a nested
+   enumeration. Bulleted lists are kept out of the numbering. */
+.tueai-slide ol > li::before {
+  content: counters(list-item, '.') '.';
+  position: absolute;
+  right: calc(100% + var(--labelsep));
+  color: var(--item);
+}
+.tueai-slide ul {
+  counter-reset: none;
+}
+.tueai-slide ul > li {
+  counter-increment: list-item 0;
+}
+
+/* itemize: the slanted bar of the logo (\tueitem). Its size follows the
+   baseline skip, and it stands on the baseline of the first line. */
+.tueai-slide ul > li::before {
+  content: '';
+  position: absolute;
+  right: calc(100% + var(--labelsep));
+  top: calc(0.5lh + var(--baseline-shift) - 0.6207lh);
+  width: 0.3136lh;
+  height: 0.6207lh;
+  background: var(--bullet-1);
+  clip-path: polygon(100% 0, 0 20.5%, 0 100%, 100% 88.34%);
+}
+.tueai-slide li ul > li::before {
+  background: var(--bullet-2);
+}
+.tueai-slide li li ul > li::before {
+  background: var(--bullet-3);
+}
+
+/* description lists: <dl> with labels right-aligned in a common column */
+.tueai-slide dl {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  column-gap: calc(5 * var(--pt));
+  row-gap: calc(3 * var(--pt));
+  margin: calc(3 * var(--pt)) 0;
+}
+.tueai-slide dt {
+  text-align: right;
+  color: var(--alert);
+}
+
+/* ---------- Tables ---------- */
+
+/* A centered tabular with an \hline below every row but the last, in the rule
+   color of the beamer theme (\arrayrulecolor{TueAIbrightyellow}). The strut
+   of a row reaches 8.4pt above and 3.6pt below the baseline. */
+.tueai-slide table {
+  margin: calc(6 * var(--pt)) auto;
+  border-collapse: collapse;
+}
+.tueai-slide :is(th, td) {
+  padding: 0 calc(6 * var(--pt)) calc(2.04 * var(--pt)); /* \tabcolsep */
+  line-height: calc(9.96 * var(--pt));
+  font-weight: inherit;
+  text-align: left;
+}
+.tueai-slide tr {
+  border-bottom: calc(0.4 * var(--pt)) solid var(--rule);
+}
+.tueai-slide tbody tr:last-child {
+  border-bottom: none;
+}
+
+/* ---------- Math (KaTeX) ---------- */
+
+/* Math is set in the size of the surrounding text, as in LaTeX */
+.tueai-slide .katex {
+  font-size: 1em;
+}
+/* Inline formulas get their height from the struts of KaTeX alone, so that
+   they do not push the lines of a paragraph apart */
+.tueai-slide :not(.katex-display) > .katex {
+  line-height: 0;
+}
+/* The stacks inside a formula (sub- and superscripts, accents, roots) keep
+   the line height of KaTeX. Without it, Safari sets them too high. */
+.tueai-slide .katex .vlist-t {
+  line-height: 1.2;
+}
+.tueai-slide .katex-display {
+  margin: calc(8.8 * var(--pt)) 0 calc(10 * var(--pt)); /* \abovedisplayskip, \belowdisplayskip */
+}
+
+/* beamer sets the latin letters of formulas in the sans-serif text font and
+   keeps Computer Modern for everything else. "TueAI Math Letters" is Roboto
+   Condensed Light restricted to A-Z and a-z, so that digits, greek letters
+   and symbols fall through to the KaTeX fonts. */
+@font-face {
+  font-family: 'TueAI Math Letters';
+  font-style: italic;
+  font-display: block;
+  src: url('../assets/fonts/roboto-condensed-latin-300-italic.woff2') format('woff2');
+  unicode-range: U+0041-005A, U+0061-007A;
+}
+@font-face {
+  font-family: 'TueAI Math Letters';
+  font-style: normal;
+  font-display: block;
+  src: url('../assets/fonts/roboto-condensed-latin-300-normal.woff2') format('woff2');
+  unicode-range: U+0041-005A, U+0061-007A;
+}
+.tueai-slide .katex .mathnormal {
+  font-family: 'TueAI Math Letters', KaTeX_Math;
+}
+/* The names of operators (\exp, \operatorname{...}) */
+.tueai-slide .katex .mop:not(.op-symbol) {
+  font-family: 'TueAI Math Letters', KaTeX_Main;
+}
+
+/* \text{...} and \mathrm{...} are set in the text font of the slide, digits
+   and punctuation included. KaTeX resets the weight, so it is set again. */
+.tueai-slide .katex :is(.text, .mathrm) {
+  font-family: var(--font-main), KaTeX_Main;
+  font-weight: var(--weight-normal);
+}
+.tueai-slide .katex .textbf {
+  font-weight: var(--weight-bold);
+}
+.tueai-slide .katex .texttt {
+  font-family: var(--font-mono), KaTeX_Typewriter;
+  font-size: calc(var(--mono-scale) * 1em);
+}
+/* The symbols of a formula inside a text, \text{if $x > 1$}, stay as they are */
+.tueai-slide .katex .text :is(.mrel, .mbin, .mopen, .mclose, .mpunct) {
+  font-family: KaTeX_Main;
+  font-weight: normal;
+}
